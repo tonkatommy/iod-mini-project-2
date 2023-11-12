@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,13 +13,20 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import WatchIcon from "@mui/icons-material/Watch";
 
-const pages = ["Home", "Shop", "Login"];
+// const pages = ["Home", "Shop", "Login"];
+const pages = [
+  { title: "Home", path: "/home" },
+  { title: "Shop", path: "/shop" },
+  { title: "Login", path: "/user/login" },
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -28,25 +36,27 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (e) => {
-    console.log(e);
     setAnchorElNav(null);
+    console.log(e.currentTarget.key);
+    navigate(e.currentTarget.key);
   };
 
   const handleCloseUserMenu = (e) => {
-    console.log(e);
     setAnchorElUser(null);
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
+        {/* logo and links */}
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <WatchIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          {/* Main Brand title */}
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -88,9 +98,10 @@ function ResponsiveAppBar() {
               }}>
               {pages.map((page) => (
                 <MenuItem
-                  key={page}
+                  id={page.title.toLowerCase()}
+                  key={page.path}
                   onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -121,10 +132,12 @@ function ResponsiveAppBar() {
             }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                id={page.title.toLowerCase()}
+                // path={page.path}
+                key={page.path}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
+                {page.title}
               </Button>
             ))}
           </Box>
@@ -168,5 +181,5 @@ function ResponsiveAppBar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default ResponsiveAppBar;
