@@ -5,34 +5,47 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import BasicModal from "../Modal/BasicModal";
+import { Box } from "@mui/system";
 
-export default function ImgMediaCard(props) {
+const ImgMediaCard = ({ watch }) => {
+  // console.log(watch);
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{ maxWidth: 345, display: "flex" }}
+      key={watch.wb.id}>
       <CardMedia
         component="img"
         alt="green iguana"
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        image={watch.images[0]}
       />
-      <CardContent>
-        <Typography
-          gutterBottom
-          variant="h5"
-          component="div">
-          Lizard
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent>
+          <Typography
+            variant="subtitle2"
+            component="div">
+            {watch.brand.name}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="subtitle1"
+            component="div">
+            {watch.name}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary">
+            {watch.family.name}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Share</Button>
+          <BasicModal watch={watch} />
+        </CardActions>
+      </Box>
     </Card>
   );
-}
+};
+
+export default ImgMediaCard;

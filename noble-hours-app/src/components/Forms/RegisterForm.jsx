@@ -76,6 +76,7 @@ const RegisterForm = () => {
           value={dateOfBirth}
           fullWidth
           required
+          InputLabelProps={{ shrink: true }}
           sx={{ mb: 4 }}
         />
         <Button

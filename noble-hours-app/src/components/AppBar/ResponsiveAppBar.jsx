@@ -14,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import WatchIcon from "@mui/icons-material/Watch";
+import { useUserContext } from "../../context/UserContext";
 
 // const pages = ["Home", "Shop", "Login"];
 const pages = [
@@ -27,6 +28,7 @@ const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+  const { currentUser, handleUpdateUser } = useUserContext();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,12 +39,17 @@ const ResponsiveAppBar = () => {
 
   const handleCloseNavMenu = (e) => {
     setAnchorElNav(null);
-    console.log(e.currentTarget.key);
-    navigate(e.currentTarget.key);
+    console.log(e);
+    console.log(e.target.value);
+    navigate(e.target.value);
   };
 
   const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
+    if (e.target.value === "logout") {
+      handleUpdateUser(null);
+      navigate("/user/login");
+    }
   };
 
   return (
@@ -97,16 +104,23 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}>
               {pages.map((page) => (
-                <MenuItem
-                  id={page.title.toLowerCase()}
-                  key={page.path}
-                  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
+                <Button
+                  value={page.path}
+                  key={page.title}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 1,
+                    mx: 1,
+                    color: "text.primary",
+                    display: "block",
+                  }}>
+                  {page.title}
+                </Button>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
+          <WatchIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -132,9 +146,8 @@ const ResponsiveAppBar = () => {
             }}>
             {pages.map((page) => (
               <Button
-                id={page.title.toLowerCase()}
-                // path={page.path}
-                key={page.path}
+                value={page.path}
+                key={page.title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}>
                 {page.title}
@@ -168,13 +181,19 @@ const ResponsiveAppBar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem
                   key={setting}
                   onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+              <MenuItem
+                // key={setting}
+                value="logout"
+                onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
