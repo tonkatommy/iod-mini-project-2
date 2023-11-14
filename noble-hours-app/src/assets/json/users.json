@@ -1,0 +1,16 @@
+[
+  {
+    "fName": "Tony",
+    "lName": "Stark",
+    "email": "ironman@stark.ind",
+    "dob": "",
+    "pword": "123"
+  },
+  {
+    "fName": "Tommy",
+    "lName": "Goodman",
+    "email": "tommy@email.com",
+    "dob": "1985/10/2",
+    "pword": "321"
+  }
+]

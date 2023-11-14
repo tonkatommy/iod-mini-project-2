@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Container, Stack } from "@mui/material";
+import { TextField, Button, Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
@@ -16,10 +16,14 @@ const RegisterForm = () => {
 
   return (
     <>
-      <h2>Register Form</h2>
       <form
         onSubmit={handleSubmit}
         action={<Link to="/login" />}>
+        <Typography
+          variant="h5"
+          sx={{ my: 4 }}>
+          Register Form
+        </Typography>
         <Stack
           spacing={2}
           direction="row"
@@ -82,13 +86,16 @@ const RegisterForm = () => {
         <Button
           variant="outlined"
           color="secondary"
-          type="submit">
+          type="submit"
+          size="large">
           Register
         </Button>
+        <Typography
+          variant="body2"
+          sx={{ mt: 2 }}>
+          Already have an account? <Link to="/user/login">Login Here</Link>
+        </Typography>
       </form>
-      <small>
-        Already have an account? <Link to="/user/login">Login Here</Link>
-      </small>
     </>
   );
 };

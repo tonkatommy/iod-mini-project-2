@@ -9,14 +9,13 @@ import BasicModal from "../Modal/BasicModal";
 import { Box } from "@mui/system";
 
 const ImgMediaCard = ({ watch }) => {
-  // console.log(watch);
   return (
     <Card
       sx={{ maxWidth: 345, display: "flex" }}
       key={watch.wb.id}>
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt={"Image of " + watch.name}
         height="140"
         image={watch.images[0]}
       />

@@ -8,19 +8,24 @@ import RegisterForm from "../components/Forms/RegisterForm";
 const AppRoutes = (props) => {
   return (
     <>
+      {/* Main Routes */}
       <Routes>
+        {/* Index route to HomePage triggers page reload */}
         <Route
           index
           element={<HomePage />}
         />
+        {/* Home route to HomePage - won't trigger reload */}
         <Route
           path="/home"
           element={<HomePage />}
         />
+        {/* Shop route to ShopPage*/}
         <Route
           path="/shop"
           element={<ShopPage />}
         />
+        {/* User route to UserPage  */}
         <Route
           path="/user"
           element={<LoginPage />}>

@@ -37,7 +37,11 @@ const LoginForm = () => {
         <form
           autoComplete="off"
           onSubmit={handleSubmit}>
-          <h2>Login Form</h2>
+          <Typography
+            variant="h5"
+            sx={{ my: 4 }}>
+            Login Form
+          </Typography>
           <TextField
             label="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -65,15 +69,16 @@ const LoginForm = () => {
           <Button
             variant="outlined"
             color="primary"
-            type="submit">
+            type="submit"
+            size="large">
             Login
           </Button>
+          <Typography
+            variant="body2"
+            sx={{ mt: 2 }}>
+            Need an account? <Link to="/user/register">Register here</Link>
+          </Typography>
         </form>
-        <Typography
-          variant="caption"
-          sx={{ my: 4 }}>
-          Need an account? <Link to="/user/register">Register here</Link>
-        </Typography>
       </Box>
     </>
   );

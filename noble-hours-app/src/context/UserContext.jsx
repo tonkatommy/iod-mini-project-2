@@ -6,7 +6,7 @@ const UserContext = createContext();
 // Use it in App.jsx like <UserProvider>...</UserProvider>
 export const UserProvider = (props) => {
   // store the current user in state at the top level
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   // sets user object in state, shared via context
   const handleUpdateUser = (user) => {
     setCurrentUser(user);
