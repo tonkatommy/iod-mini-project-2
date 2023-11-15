@@ -4,13 +4,23 @@
     "lName": "Stark",
     "email": "ironman@stark.ind",
     "dob": "",
-    "pword": "123"
+    "pword": "123",
+    "pic": "/src/assets/img/ironman.jpg"
   },
   {
     "fName": "Tommy",
     "lName": "Goodman",
     "email": "tommy@email.com",
     "dob": "1985/10/2",
-    "pword": "321"
+    "pword": "321",
+    "pic": ""
+  },
+  {
+    "fName": "Franklin",
+    "lName": "RedEar",
+    "email": "franklin@turtle.swim",
+    "dob": "2015/9/23",
+    "pword": "swim",
+    "pic": "/src/assets/img/franklin.jpg"
   }
 ]

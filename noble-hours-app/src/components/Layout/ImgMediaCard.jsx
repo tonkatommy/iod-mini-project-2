@@ -37,9 +37,14 @@ const ImgMediaCard = ({ watch }) => {
             color="text.secondary">
             {watch.family.name}
           </Typography>
+          <Typography
+            variant="caption"
+            color="text.dark">
+            {watch.prices ? "$" + watch.prices[0].watch_price : "$n/a"}
+          </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
+          <Button size="small">Buy</Button>
           <BasicModal watch={watch} />
         </CardActions>
       </Box>

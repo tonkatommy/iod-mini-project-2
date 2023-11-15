@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
-import { Box, Container, textAlign } from "@mui/system";
+import { Box, Container } from "@mui/system";
 import { Typography } from "@mui/material";
 
 const UserPage = (props) => {
+  const { currentUser, handleUpdateUser } = useUserContext();
+
   return (
     <>
       <Container

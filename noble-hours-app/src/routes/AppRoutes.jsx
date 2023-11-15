@@ -1,9 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
+import AboutPage from "../pages/AboutPage";
 import ShopPage from "../pages/ShopPage";
 import LoginPage from "../pages/UserPage";
 import LoginForm from "../components/Forms/LoginForm";
 import RegisterForm from "../components/Forms/RegisterForm";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = (props) => {
   return (
@@ -20,10 +22,19 @@ const AppRoutes = (props) => {
           path="/home"
           element={<HomePage />}
         />
-        {/* Shop route to ShopPage*/}
+        {/* About route to AboutPage - won't trigger reload  */}
+        <Route
+          path="/about"
+          element={<AboutPage />}
+        />
+        {/* Shop route to ShopPage Protected Route */}
         <Route
           path="/shop"
-          element={<ShopPage />}
+          element={
+            <ProtectedRoute>
+              <ShopPage />
+            </ProtectedRoute>
+          }
         />
         {/* User route to UserPage  */}
         <Route

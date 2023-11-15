@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { TextField, FormControl, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { TextField, Button } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
-import { Box, textAlign } from "@mui/system";
+import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
+import users from "../../assets/json/users.json";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ const LoginForm = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const { currentUser, handleUpdateUser } = useUserContext();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,7 +30,20 @@ const LoginForm = () => {
     }
 
     if (email && password) {
-      handleUpdateUser({ email, password });
+      const userCheck = users.find((user) => user.email === email);
+      if (userCheck) {
+        if (userCheck.pword === password) {
+          console.log("login success");
+          handleUpdateUser(userCheck);
+          navigate("/shop");
+        } else {
+          console.log("login failed");
+        }
+      } else {
+        console.log("login failed");
+      }
+
+      // handleUpdateUser({ email, password });
     }
   };
 
@@ -41,6 +57,11 @@ const LoginForm = () => {
             variant="h5"
             sx={{ my: 4 }}>
             Login Form
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ my: 4 }}>
+            You must log in before you can shop.
           </Typography>
           <TextField
             label="Email"

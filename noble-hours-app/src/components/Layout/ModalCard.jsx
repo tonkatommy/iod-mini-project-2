@@ -1,7 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
@@ -18,9 +20,9 @@ const style = {
   flexDirection: "row",
 };
 
-export default function ModalCard({ watch }) {
+const ModalCard = React.forwardRef(({ watch }, ref) => {
   return (
-    <Card>
+    <Card ref={ref}>
       <Box sx={style}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent>
@@ -45,7 +47,16 @@ export default function ModalCard({ watch }) {
               component="div">
               {watch.description}
             </Typography>
+            <Typography
+              variant="caption"
+              color="text.dark">
+              {watch.prices ? "$" + watch.prices[0].watch_price : "$n/a"}
+            </Typography>
           </CardContent>
+          <CardActions>
+            <Button size="small">Buy</Button>
+            <Button size="small">Close</Button>
+          </CardActions>
         </Box>
 
         <CardMedia
@@ -57,4 +68,5 @@ export default function ModalCard({ watch }) {
       </Box>
     </Card>
   );
-}
+});
+export default ModalCard;

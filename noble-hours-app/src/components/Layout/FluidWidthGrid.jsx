@@ -1,8 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
-import watches from "../../assets/json/watches.json";
-import ImgMediaCard from "../Cards/ImgMediaCard";
+import ImgMediaCard from "./ImgMediaCard";
 
 // Originally using axios to get data from API
 // however too many API calls were made. I have 'cached' the
@@ -11,7 +10,7 @@ import ImgMediaCard from "../Cards/ImgMediaCard";
 // import axios from "axios";
 // import { useGetData } from "../../hooks/useGetData";
 
-const FullWidthGrid = () => {
+const FullWidthGrid = ({ watches }) => {
   // const watches = useGetData("./watches.json");
 
   return (
@@ -24,6 +23,7 @@ const FullWidthGrid = () => {
         {/* Map to return an ImageMediaCard for each watch */}
         {watches.map((watch) => (
           <Grid
+            key={watch.wb.id}
             xs={12}
             sm={6}
             md={4}

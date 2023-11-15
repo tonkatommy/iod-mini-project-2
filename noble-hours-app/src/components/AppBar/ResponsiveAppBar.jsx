@@ -12,15 +12,14 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import WatchIcon from "@mui/icons-material/Watch";
 import { useUserContext } from "../../context/UserContext";
 
 // const pages = ["Home", "Shop", "Login"];
 const pages = [
-  { title: "Home", path: "/home" },
+  { title: "About", path: "/about" },
   { title: "Shop", path: "/shop" },
-  { title: "Login", path: "/user/login" },
+  { title: "Home", path: "/home" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -46,9 +45,10 @@ const ResponsiveAppBar = () => {
 
   const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
-    if (e.target.value === "logout") {
+    // console.log(e.target.innerHTML);
+    if (e.target.innerHTML === "Logout") {
       handleUpdateUser(null);
-      navigate("/user/login");
+      navigate("/");
     }
   };
 
@@ -119,7 +119,6 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
           <WatchIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -155,47 +154,53 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/static/images/avatar/2.jpg"
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
-              {/* {settings.map((setting) => (
+          {currentUser ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}>
+                  <Avatar
+                    alt={currentUser ? currentUser.fName : "User Profile"}
+                    src={currentUser ? currentUser.pic : ""}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}>
+                {/* {settings.map((setting) => (
                 <MenuItem
                   key={setting}
                   onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))} */}
-              <MenuItem
-                // key={setting}
-                value="logout"
-                onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+                <MenuItem
+                  // key={setting}
+                  value="logout"
+                  onClick={handleCloseUserMenu}>
+                  <Typography
+                    component="a"
+                    value="logout">
+                    Logout
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          ) : null}
         </Toolbar>
       </Container>
     </AppBar>
