@@ -38,9 +38,12 @@ const LoginForm = () => {
           navigate("/shop");
         } else {
           console.log("login failed");
+          setPasswordError(true);
         }
       } else {
         console.log("login failed");
+        setEmailError(true);
+        setPasswordError(true);
       }
 
       // handleUpdateUser({ email, password });
