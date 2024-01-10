@@ -17,193 +17,209 @@ import { useUserContext } from "../../context/UserContext";
 
 // const pages = ["Home", "Shop", "Login"];
 const pages = [
-  { title: "About", path: "/about" },
-  { title: "Shop", path: "/shop" },
-  { title: "Home", path: "/home" },
+    { title: "About", path: "/about" },
+    { title: "Shop", path: "/shop" },
+    { title: "Home", path: "/home" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const navigate = useNavigate();
-  const { currentUser, handleUpdateUser } = useUserContext();
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const navigate = useNavigate();
+    const { currentUser, handleUpdateUser } = useUserContext();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
-  const handleCloseNavMenu = (e) => {
-    setAnchorElNav(null);
-    console.log(e);
-    console.log(e.target.value);
-    navigate(e.target.value);
-  };
+    const handleCloseNavMenu = (e) => {
+        setAnchorElNav(null);
+        console.log(e);
+        console.log(e.target.value);
+        navigate(e.target.value);
+    };
 
-  const handleCloseUserMenu = (e) => {
-    setAnchorElUser(null);
-    // console.log(e.target.innerHTML);
-    if (e.target.innerHTML === "Logout") {
-      handleUpdateUser(null);
-      navigate("/");
-    }
-  };
+    const handleCloseUserMenu = (e) => {
+        setAnchorElUser(null);
+        // console.log(e.target.innerHTML);
+        if (e.target.innerHTML === "Logout") {
+            handleUpdateUser(null);
+            navigate("/");
+        }
+    };
 
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        {/* logo and links */}
-        <Toolbar disableGutters>
-          <WatchIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          {/* Main Brand title */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}>
-            NOBLE HOURS
-          </Typography>
+    return (
+        <AppBar position="static">
+            <Container maxWidth="xl">
+                {/* logo and links */}
+                <Toolbar disableGutters>
+                    <WatchIcon
+                        sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+                    />
+                    {/* Main Brand title */}
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: "none", md: "flex" },
+                            fontFamily: "monospace",
+                            fontWeight: 700,
+                            letterSpacing: ".3rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}>
+                        NOBLE HOURS
+                    </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit">
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}>
-              {pages.map((page) => (
-                <Button
-                  value={page.path}
-                  key={page.title}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 1,
-                    mx: 1,
-                    color: "text.primary",
-                    display: "block",
-                  }}>
-                  {page.title}
-                </Button>
-              ))}
-            </Menu>
-          </Box>
-          <WatchIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}>
-            NOBLE HOURS
-          </Typography>
-          <Box
-            sx={{
-              flexGrow: 1,
-              flexDirection: "row-reverse",
-              display: { xs: "none", md: "flex" },
-            }}>
-            {pages.map((page) => (
-              <Button
-                value={page.path}
-                key={page.title}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                {page.title}
-              </Button>
-            ))}
-          </Box>
+                    <Box
+                        sx={{
+                            flexGrow: 1,
+                            display: { xs: "flex", md: "none" },
+                        }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit">
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "left",
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "left",
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: "block", md: "none" },
+                            }}>
+                            {pages.map((page) => (
+                                <Button
+                                    value={page.path}
+                                    key={page.title}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{
+                                        my: 1,
+                                        mx: 1,
+                                        color: "text.primary",
+                                        display: "block",
+                                    }}>
+                                    {page.title}
+                                </Button>
+                            ))}
+                        </Menu>
+                    </Box>
+                    <WatchIcon
+                        sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+                    />
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="#app-bar-with-responsive-menu"
+                        sx={{
+                            mr: 2,
+                            display: { xs: "flex", md: "none" },
+                            flexGrow: 1,
+                            fontFamily: "monospace",
+                            fontWeight: 700,
+                            letterSpacing: ".3rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}>
+                        NOBLE HOURS
+                    </Typography>
+                    <Box
+                        sx={{
+                            flexGrow: 1,
+                            flexDirection: "row-reverse",
+                            display: { xs: "none", md: "flex" },
+                        }}>
+                        {pages.map((page) => (
+                            <Button
+                                value={page.path}
+                                key={page.title}
+                                onClick={handleCloseNavMenu}
+                                sx={{
+                                    my: 2,
+                                    color: "white",
+                                    display: "block",
+                                }}>
+                                {page.title}
+                            </Button>
+                        ))}
+                    </Box>
 
-          {currentUser ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0 }}>
-                  <Avatar
-                    alt={currentUser ? currentUser.fName : "User Profile"}
-                    src={currentUser ? currentUser.pic : ""}
-                  />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}>
-                {/* {settings.map((setting) => (
+                    {currentUser ? (
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton
+                                    onClick={handleOpenUserMenu}
+                                    sx={{ p: 0 }}>
+                                    <Avatar
+                                        alt={
+                                            currentUser
+                                                ? currentUser.fName
+                                                : "User Profile"
+                                        }
+                                        src={currentUser ? currentUser.pic : ""}
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: "45px" }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}>
+                                {/* {settings.map((setting) => (
                 <MenuItem
                   key={setting}
                   onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))} */}
-                <MenuItem
-                  // key={setting}
-                  value="logout"
-                  onClick={handleCloseUserMenu}>
-                  <Typography
-                    component="a"
-                    value="logout">
-                    Logout
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
-          ) : null}
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
+                                <MenuItem
+                                    // key={setting}
+                                    value="logout"
+                                    onClick={handleCloseUserMenu}>
+                                    <Typography
+                                        component="a"
+                                        value="logout">
+                                        Logout
+                                    </Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                    ) : null}
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
 };
 export default ResponsiveAppBar;
